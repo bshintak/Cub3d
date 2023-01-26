@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/24 12:25:13 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:23:55 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define C_SO 2
 # define C_WE 3
 
-# define CUB_W 1920
-# define CUB_H 1080
+# define CUB_W 1000
+# define CUB_H 500
 
 #define MAP_W 1900
 #define MAP_H 900

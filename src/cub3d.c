@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:20:45 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/25 16:52:27 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:07:02 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,11 +160,8 @@ void	init_mlx(t_cub *cub)
 	mlx_loop(cub->mlx);
 }
 
-void	search_direction(t_cub **tmp)
+void	search_direction(t_cub *cub)
 {
-	t_cub *cub;
-
-	cub = *tmp;
 	if (cub->direction == 'N' || cub->direction == 'S')
 	{
 		cub->dir_x = 0;
@@ -183,15 +180,12 @@ void	search_direction(t_cub **tmp)
 	}
 }
 
-void	search_plane(t_cub **tmp)
+void	search_plane(t_cub *cub)
 {
 	// N = plane_x = 0; plane_y = -0.66;
 	// S = plane_x = 0; plane_y = 0.66;
 	// W = plane_x = -0.66; plane_y = 0;
 	// E = plane_x = 0.66; plane_y = 0;
-	t_cub *cub;
-
-	cub = *tmp;
 	if (cub->direction == 'N' || cub->direction == 'S')
 	{
 		cub->plane_x = (0.66 * cub->dir_y) * 1;
@@ -228,8 +222,6 @@ void	calc_sideDist(t_ray *ray, t_cub *cub)
 		ray->steps_y = 1;
 		ray->sideDist_y = (ray->map_y + 1.0 - cub->pos_y) * ray->deltaDist_y;
 	}
-	printf("sideDist x = %f\n", ray->sideDist_x);
-	printf("sideDist y = %f\n", ray->sideDist_y);
 }
 
 void	calc_deltaDist(t_ray *ray)
@@ -242,8 +234,6 @@ void	calc_deltaDist(t_ray *ray)
 		ray->deltaDist_y = 1e30;
 	else
 		ray->deltaDist_y = fabs(1 / ray->rayDir_y);
-	printf("deltaDist x = %f\n", ray->deltaDist_x);
-	printf("deltaDist y = %f\n", ray->deltaDist_y);
 }
 
 void	hit_wall(t_cub *cub, t_ray *ray)
@@ -275,12 +265,9 @@ void	hit_wall(t_cub *cub, t_ray *ray)
 int	raycasting_loop(t_cub *cub)
 {
 	t_ray	ray;
-	// t_cub	*cub;
 	int		i;
 
-	// cub = *tmp;
 	ray.i = -1;
-	i = -1;
 	while (++ray.i < CUB_W)
 	{
 		ray.camera_x = 2 * ray.i / (double)CUB_W - 1;
@@ -289,45 +276,44 @@ int	raycasting_loop(t_cub *cub)
 		calc_deltaDist(&ray);
 		calc_sideDist(&ray, cub);
 		hit_wall(cub, &ray);
-		ray.line_h = (int)CUB_H / ray.perpendicular;
+		ray.line_h = (int)(CUB_H / ray.perpendicular);
 		ray.start = -ray.line_h / 2 + CUB_H / 2;
 		if (ray.start < 0)
 			ray.start = 0;
 		ray.end = ray.line_h / 2 + CUB_H / 2;
 		if (ray.end > CUB_H)
 			ray.end = CUB_H;
+		i = -1;
 		while (++i < ray.start)
-			mlx_pixel_put(cub->mlx, cub->mlx_w, CUB_W - ray.i - 1, i, 0x000000FF);
+			mlx_pixel_put(cub->mlx, cub->mlx_w, CUB_W - ray.i - 1, i, (0x000000FF / 6));
+		while (++i < ray.end)
+		{
+			if (ray.side == 0)
+				mlx_pixel_put(cub->mlx, cub->mlx_w, CUB_W - ray.i - 1, i, (0x0000FF00 / 2));
+			else
+				mlx_pixel_put(cub->mlx, cub->mlx_w, CUB_W - ray.i - 1, i, (0x0000FF00 / 6));
+		}
 		while (++i < CUB_H)
-			mlx_pixel_put(cub->mlx, cub->mlx_w, CUB_W - ray.i - 1, i, 0x00FF0000);
+			mlx_pixel_put(cub->mlx, cub->mlx_w, CUB_W - ray.i - 1, i, (0x000000FF / 20));
 	}
-	return(0);
+	return (0);
 }
 
-// int	init_game(int key, t_cub *cub)
-// {
-// 	(void)key;
-// 	raycasting_loop(&cub);
-// 	// key_game();
-// 	return (0);
-// }
+int	init_raycasting(t_cub **cub)
+{
+	raycasting_loop(*cub);
+	// raycasting_key(*cub, key);
+	return (0);
+}
 
 void	ray_main(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	cub->mlx_w = mlx_new_window(cub->mlx, CUB_W, CUB_H, "Cub3d");
 	search_player(cub);
-	search_direction(&cub);
-	search_plane(&cub);
-	// print_minimap(cub);
-	printf("x = %f\n", cub->pos_x);
-	printf("y = %f\n", cub->pos_y);
-	printf("dir = %c\n", cub->direction);
-	printf("dir x = %d\n", cub->dir_x);
-	printf("dir y = %d\n", cub->dir_y);
-	printf("plane x = %f\n", cub->plane_x);
-	printf("plane y = %f\n", cub->plane_y);
-	mlx_loop_hook(cub->mlx, raycasting_loop, cub);
+	search_direction(cub);
+	search_plane(cub);
+	mlx_loop_hook(cub->mlx, init_raycasting, &cub);
 	mlx_loop(cub->mlx);
 }
 
