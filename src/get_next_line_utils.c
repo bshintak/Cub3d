@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:45:01 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/17 15:07:58 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:59:35 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,11 @@ size_t	ft_strlen(char const *str)
 {
 	size_t	i;
 
-	// printf("str = |%s|\n", str);
 	i = 0;
 	if (!str)
 		return (0);
 	while (str[i])
-	{
-		// printf("str[i] = |%c|\n", str[i]);
 		i++;
-	}
 	return (i);
 }
 

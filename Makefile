@@ -22,8 +22,11 @@ SRCS_		=	cub3d.c \
 				close.c \
 				raycasting.c \
 				ray_key.c \
-				testing_prints.c \
+				search.c \
+				put_color.c \
+				delta_side_dist.c \
 				get_next_line.c \
+				testing_prints.c \
 				get_next_line_utils.c \
 				map_parser/map_parser.c \
 				map_parser/map_parser2.c \

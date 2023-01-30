@@ -6,11 +6,36 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:56:09 by bshintak          #+#    #+#             */
-/*   Updated: 2023/01/30 17:18:44 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:39:15 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	raycasting_loop(t_cub *cub)
+{
+	t_ray	ray;
+
+	ray.i = -1;
+	while (++ray.i < CUB_W)
+	{
+		ray.camera_x = 2 * ray.i / (double)CUB_W - 1;
+		ray.ray_dir_x = cub->dir_x + cub->plane_x * ray.camera_x;
+		ray.ray_dir_y = cub->dir_y + cub->plane_y * ray.camera_x;
+		calc_delta_dist(&ray);
+		calc_side_dist(&ray, cub);
+		hit_wall(cub, &ray);
+		ray.line_h = (int)(CUB_H / ray.perpendicular);
+		ray.start = -ray.line_h / 2 + CUB_H / 2;
+		if (ray.start < 0)
+			ray.start = 0;
+		ray.end = ray.line_h / 2 + CUB_H / 2;
+		if (ray.end >= CUB_H)
+			ray.end = CUB_H -1;
+		put_color(&ray, cub);
+	}
+	return (0);
+}
 
 void	ray_main(t_cub *cub)
 {

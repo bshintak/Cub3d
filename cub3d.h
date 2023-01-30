@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/30 17:31:37 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/30 18:46:48 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 # define C_SO 2
 # define C_WE 3
 
-# define ROT 0.1
-# define MOVE 0.1
+# define ROT 0.2
+# define MOVE 0.2
 
 # define CUB_W 1000
 # define CUB_H 500
 
-# define MAP_W 1900
-# define MAP_H 900
+# define MAP_W 1920
+# define MAP_H 1080
 # define MAP_S_Y 100
 # define MAP_S_X 100
 # define MAP_RADIUS 200
@@ -61,12 +61,12 @@ typedef struct s_ray{
 	int				i;
 	double			camera_x;
 	double			perpendicular;
-	double			rayDir_x;
-	double			rayDir_y;
-	double			deltaDist_x;
-	double			deltaDist_y;
-	double			sideDist_x;
-	double			sideDist_y;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			side_dist_x;
+	double			side_dist_y;
 	double			steps_x;
 	double			steps_y;
 	int				map_x;
@@ -96,8 +96,6 @@ typedef struct s_cub {
 	int					key_d;
 	int					key_l;
 	int					key_r;
-	double				moveSpeed;
-	double				rotSpeed;
 	char				**map;
 	void				*mlx;
 	void				*mlx_w;
@@ -145,12 +143,27 @@ void		free_textures(t_cub cub);
 
 //raycasting.c
 void	ray_main(t_cub *cub);
-int		raycasting_key(int key, t_cub *cub);
 int		raycasting_loop(t_cub *cub);
 
+//ray_key.c
+int		raycasting_key(int key, t_cub *cub);
+
+//close.c
 int		close_win(void);
+
+//search.c
 void	search_player(t_cub *cub);
 void	search_direction(t_cub *cub);
 void	search_plane(t_cub *cub);
+
+//delta_side_dist.c
+void	calc_delta_dist(t_ray *ray);
+void	calc_side_dist(t_ray *ray, t_cub *cub);
+
+//hit_wall.c
+void	hit_wall(t_cub *cub, t_ray *ray);
+
+//put_color.c
+void	put_color(t_ray *ray, t_cub *cub);
 
 #endif 
