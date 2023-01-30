@@ -24,6 +24,7 @@ SRCS_		=	cub3d.c \
 				ray_key.c \
 				search.c \
 				put_color.c \
+				hit_wall.c \
 				delta_side_dist.c \
 				get_next_line.c \
 				testing_prints.c \
