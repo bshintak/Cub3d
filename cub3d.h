@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/25 17:23:55 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:31:37 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
+# include <sys/time.h>
 # include "get_next_line.h"
 # include "mlx-linux/mlx.h"
 
@@ -27,29 +28,34 @@
 # define C_SO 2
 # define C_WE 3
 
+# define ROT 0.1
+# define MOVE 0.1
+
 # define CUB_W 1000
 # define CUB_H 500
 
-#define MAP_W 1900
-#define MAP_H 900
-#define MAP_S_Y 100
-#define MAP_S_X 100
-#define MAP_RADIUS 200
-#define MAP_UNIT 10
-#define MAP_X_CENTER 1000
-#define MAP_Y_CENTER 200
-#define MAP_OUTLINE 5
-#define PLAYER_RADIUS 5
+# define MAP_W 1900
+# define MAP_H 900
+# define MAP_S_Y 100
+# define MAP_S_X 100
+# define MAP_RADIUS 200
+# define MAP_UNIT 10
+# define MAP_X_CENTER 1000
+# define MAP_Y_CENTER 200
+# define MAP_OUTLINE 5
+# define PLAYER_RADIUS 5
 
-#define R_OFFSET 3
-#define G_OFFSET R_OFFSET + R_OFFSET
-#define B_OFFSET G_OFFSET + R_OFFSET
+# define R_OFFSET 3
+# define G_OFFSET R_OFFSET + R_OFFSET
+# define B_OFFSET G_OFFSET + R_OFFSET
 
-#define KEY_W 119
-#define KEY_A 97
-#define KEY_S 115
-#define KEY_D 100
-#define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_ESC 65307
+# define KEY_R 65363
+# define KEY_L 65361
 
 typedef struct s_ray{
 	int				i;
@@ -61,8 +67,8 @@ typedef struct s_ray{
 	double			deltaDist_y;
 	double			sideDist_x;
 	double			sideDist_y;
-	int				steps_x;
-	int				steps_y;
+	double			steps_x;
+	double			steps_y;
 	int				map_x;
 	int				map_y;
 	int				hitWall;
@@ -80,15 +86,18 @@ typedef struct s_cub {
 	double				pos_x;
 	double				pos_y;
 	char				direction;
-	int					dir_x;
-	int					dir_y;
+	double				dir_x;
+	double				dir_y;
 	double				plane_x;
 	double				plane_y;
 	int					key_w;
 	int					key_a;
 	int					key_s;
 	int					key_d;
-	int					key_;
+	int					key_l;
+	int					key_r;
+	double				moveSpeed;
+	double				rotSpeed;
 	char				**map;
 	void				*mlx;
 	void				*mlx_w;
@@ -133,5 +142,15 @@ void		free_matrix(char **matrix);
 //map_parser_utils3.c
 int			parse_error(char *line, t_cub *cub, char *msg);
 void		free_textures(t_cub cub);
+
+//raycasting.c
+void	ray_main(t_cub *cub);
+int		raycasting_key(int key, t_cub *cub);
+int		raycasting_loop(t_cub *cub);
+
+int		close_win(void);
+void	search_player(t_cub *cub);
+void	search_direction(t_cub *cub);
+void	search_plane(t_cub *cub);
 
 #endif 

@@ -19,6 +19,9 @@ NAME		=	cub3d
 INCLUDE		=	-I ./ mlx-linux/libmlx_Linux.a
 
 SRCS_		=	cub3d.c \
+				close.c \
+				raycasting.c \
+				ray_key.c \
 				testing_prints.c \
 				get_next_line.c \
 				get_next_line_utils.c \
