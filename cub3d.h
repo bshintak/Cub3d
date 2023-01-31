@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/30 18:47:39 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:13:30 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@
 # define C_SO 2
 # define C_WE 3
 
-# define ROT 0.2
-# define MOVE 0.2
+# define ROT 0.1
+# define MOVE 0.1
 
 # define CUB_W 1000
 # define CUB_H 500
+
+# define TEX_W 64
+# define TEX_W 64
 
 # define MAP_W 1920
 # define MAP_H 1080

@@ -18,14 +18,15 @@ NAME		=	cub3d
 
 INCLUDE		=	-I ./ mlx-linux/libmlx_Linux.a
 
-SRCS_		=	cub3d.c \
-				close.c \
-				raycasting.c \
-				ray_key.c \
-				search.c \
-				put_color.c \
-				hit_wall.c \
-				delta_side_dist.c \
+SRCS_		=	time.c \
+				cub3d.c \
+				raycasting/close.c \
+				raycasting/raycasting.c \
+				raycasting/ray_key.c \
+				raycasting/search.c \
+				raycasting/put_color.c \
+				raycasting/hit_wall.c \
+				raycasting/delta_side_dist.c \
 				get_next_line.c \
 				testing_prints.c \
 				get_next_line_utils.c \
@@ -70,3 +71,5 @@ fclean:	clean
 	$(RM) -r $(_MLX)libmlx_Linux.a
 
 re:	fclean all
+
+.PHONY: all clean fclean re

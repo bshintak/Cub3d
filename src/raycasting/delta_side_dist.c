@@ -6,11 +6,11 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:51:10 by bshintak          #+#    #+#             */
-/*   Updated: 2023/01/30 17:56:26 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:03:55 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	calc_delta_dist(t_ray *ray)
 {

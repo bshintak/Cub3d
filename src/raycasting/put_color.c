@@ -6,11 +6,11 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:35:08 by bshintak          #+#    #+#             */
-/*   Updated: 2023/01/30 18:43:02 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:04:04 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	put_color(t_ray *ray, t_cub *cub)
 {

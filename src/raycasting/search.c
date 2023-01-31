@@ -6,11 +6,11 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:06:10 by bshintak          #+#    #+#             */
-/*   Updated: 2023/01/30 18:32:36 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:04:20 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	search_player(t_cub *cub)
 {

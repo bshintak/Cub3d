@@ -6,11 +6,11 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:45:51 by bshintak          #+#    #+#             */
-/*   Updated: 2023/01/30 18:46:22 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:04:00 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	hit_wall(t_cub *cub, t_ray *ray)
 {
