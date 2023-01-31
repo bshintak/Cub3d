@@ -1,5 +1,12 @@
 # Cub3d
 
+[![Intro](https://img.shields.io/badge/Cursus-Cub3d-success?style=for-the-badge&logo=42)](https://github.com/bshintak/Cub3d)
+ 
+ [![Stars](https://img.shields.io/github/stars/bshintak/Cub3d?color=ffff00&label=Stars&logo=Stars&style=?style=flat)](https://github.com/bshintak/Cub3d)
+ [![Size](https://img.shields.io/github/repo-size/bshintak/Cub3d?color=blue&label=Size&logo=Size&style=?style=flat)](https://github.com/bshintak/Cub3d)
+ [![Lines of code](https://img.shields.io/tokei/lines/github/bshintak/Cub3d?color=blueviolet)](https://github.com/bshintak/Cub3d)
+ [![Activity](https://img.shields.io/github/last-commit/bshintak/Cub3d?color=red&label=Last%20Commit&style=flat)](https://github.com/bshintak/Cub3d)
+
 ### search_player
 function that searches for the player in a map represented as a 2D array of characters.
 
