@@ -18,17 +18,14 @@ NAME		=	cub3d
 
 INCLUDE		=	-I ./ mlx-linux/libmlx_Linux.a
 
-SRCS_		=	time.c \
-				cub3d.c \
-				raycasting/close.c \
-				raycasting/raycasting.c \
-				raycasting/ray_key.c \
-				raycasting/search.c \
-				raycasting/put_color.c \
-				raycasting/hit_wall.c \
-				raycasting/delta_side_dist.c \
-				get_next_line.c \
+SRCS_		=	cub3d.c \
+				close.c \
+				raycasting.c \
+				ray_key.c \
+				image_printing.c \
+				minimap.c \
 				testing_prints.c \
+				get_next_line.c \
 				get_next_line_utils.c \
 				map_parser/map_parser.c \
 				map_parser/map_parser2.c \
@@ -56,10 +53,6 @@ $(NAME): $(DEPS) $(OBJS)
 ./minilibx_linux/libmlx_Linux.a:
 	make -C mlx-linux/
 
-#bonus:		$(SRCS_B) $(OBJS_B)
-#			$(CC) $(CFLAGS) $(SRCS_B) -o $(NAME_B)
-#			$(CC) $(CFLAGS) $(SRCS_B) -c
-
 $(_OBJ):
 	mkdir $@
 
@@ -71,5 +64,3 @@ fclean:	clean
 	$(RM) -r $(_MLX)libmlx_Linux.a
 
 re:	fclean all
-
-.PHONY: all clean fclean re

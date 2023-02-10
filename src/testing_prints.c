@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testing_prints.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:29:13 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/30 18:00:24 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:04:18 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void	print_matrix(char **matrix)
 	}
 	while (matrix[y])
 	{
+		// x = 0;
+		// while (matrix[y][x])
+		// {
+		// 	printf("%c", matrix[y][x]);
+		// 	x++;
+		// }
+		// printf("        [%d]\n", y);
 		printf("%s        [%d]\n", matrix[y], y);
 		y++;
 	}
