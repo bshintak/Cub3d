@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/08 17:44:53 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:29:07 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,10 @@ int		mouse_hook(int code);
 
 //minimap.c
 void	print_minimap(t_cub *cub);
+
+//calc_side_delta.c
+void	calc_sideDist(t_ray *ray, t_cub *cub);
+void	calc_deltaDist(t_ray *ray);
 
 void	init_images(t_cub *cub);
 unsigned int	*get_img_pixel(t_data *data, int x, int y);

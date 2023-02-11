@@ -19,8 +19,12 @@ NAME		=	cub3d
 INCLUDE		=	-I ./ mlx-linux/libmlx_Linux.a
 
 SRCS_		=	cub3d.c \
+				calc_side_delta.c\
+				pseudo_global.c\
+				search.c\
+				mouse/move_mouse.c\
 				close.c \
-				raycasting.c \
+				raycasting/raycasting.c \
 				ray_key.c \
 				image_printing.c \
 				minimap.c \

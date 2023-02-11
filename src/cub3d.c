@@ -6,108 +6,11 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:20:45 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/11 21:03:15 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:27:04 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	search_player(t_cub *cub)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (cub->map[y])
-	{
-		x = 0;
-		while (cub->map[y][x])
-		{
-			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' || 
-			cub->map[y][x] == 'W' || cub->map[y][x] == 'E')
-			{
-				cub->pos_x = x + 0.5;
-				cub->pos_y = y + 0.5;
-				cub->direction = cub->map[y][x];
-				cub->map[y][x] = '0';
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-void	search_direction(t_cub *cub)
-{
-	if (cub->direction == 'N' || cub->direction == 'S')
-	{
-		cub->dir_x = 0;
-		if (cub->direction == 'N')
-			cub->dir_y = -1;
-		else if (cub->direction == 'S')
-			cub->dir_y = 1;
-	}
-	else if (cub->direction == 'W' || cub->direction == 'E')
-	{
-		cub->dir_y = 0;
-		if (cub->direction == 'W')
-			cub->dir_x = -1;
-		else if (cub->direction == 'E')
-			cub->dir_x = 1;
-	}
-}
-
-void	search_plane(t_cub *cub)
-{
-	if (cub->direction == 'N' || cub->direction == 'S')
-	{
-		cub->plane_x = (0.66 * cub->dir_y) * 1;
-		cub->plane_y = (0.66 * cub->dir_x) * 1;
-	}
-	else if (cub->direction == 'W' || cub->direction == 'E')
-	{
-		cub->plane_x = (0.66 * cub->dir_y) * -1;
-		cub->plane_y = (0.66 * cub->dir_x) * -1;
-	}
-}
-
-void	calc_sideDist(t_ray *ray, t_cub *cub)
-{
-	ray->map_x = (int)cub->pos_x;
-	ray->map_y = (int)cub->pos_y;
-	if (ray->rayDir_x < 0)
-	{
-		ray->steps_x = -1;
-		ray->sideDist_x = (cub->pos_x - ray->map_x) * ray->deltaDist_x;
-	}
-	else
-	{
-		ray->steps_x = 1;
-		ray->sideDist_x = (ray->map_x + 1.0 - cub->pos_x) * ray->deltaDist_x;
-	}
-	if (ray->rayDir_y < 0)
-	{
-		ray->steps_y = -1;
-		ray->sideDist_y = (cub->pos_y - ray->map_y) * ray->deltaDist_y;
-	}
-	else
-	{
-		ray->steps_y = 1;
-		ray->sideDist_y = (ray->map_y + 1.0 - cub->pos_y) * ray->deltaDist_y;
-	}
-}
-
-void	calc_deltaDist(t_ray *ray)
-{
-	if (ray->rayDir_x == 0)
-		ray->deltaDist_x = 1e30;
-	else
-		ray->deltaDist_x = fabs(1 / ray->rayDir_x);
-	if (ray->rayDir_y == 0)
-		ray->deltaDist_y = 1e30;
-	else
-		ray->deltaDist_y = fabs(1 / ray->rayDir_y);
-}
 
 void	hit_wall(t_cub *cub, t_ray *ray)
 {
@@ -191,10 +94,10 @@ int	raycasting_loop(t_cub *cub)
 		ray.tex_pos = (ray.start - ((cub->h + CUB_H) / 2) + ray.line_h / 2) * ray.step;
 		draw_ray(cub, &ray);
 	}
-		print_minimap(cub);
-		mlx_clear_window(cub->mlx, cub->mlx_w);
-		mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->frame.img, 0, 0);
-		mlx_destroy_image(cub->mlx, cub->frame.img);
+	print_minimap(cub);
+	mlx_clear_window(cub->mlx, cub->mlx_w);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->frame.img, 0, 0);
+	mlx_destroy_image(cub->mlx, cub->frame.img);
 	return (0);
 }
 
