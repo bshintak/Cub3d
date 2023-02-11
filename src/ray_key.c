@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:00:23 by bshintak          #+#    #+#             */
-/*   Updated: 2023/02/06 15:42:48 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:07:34 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int mouse_hook(int code)
 
 int	key_up(int key, t_cub *cub)
 {
-	// printf("keycode == %d\n", key);
 	if (key == KEY_W)
 		cub->w = 0;
 	else if (key == KEY_S)

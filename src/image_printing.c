@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:08:46 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/10 13:53:19 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:02:45 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,9 @@ void	init_images(t_cub *cub)
 
 void	create_image(t_cub *cub, t_data *data, int size_x, int size_y)
 {
-	// int	i = 0;
 	data->img = mlx_new_image(cub->mlx, size_x, size_y);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
-	// data->wall2 = mlx_xpm_file_to_image(cub->mlx, "stone.xpm", &data->img_width, &data->img_height);
-	// data->addr = mlx_get_data_addr(data->wall2, &data->bits_per_pixel, &data->line_length, &data->endian);
-	// data->wall3 = mlx_xpm_file_to_image(cub->mlx, "stone.xpm", &data->img_width, &data->img_height);
-	// data->addr = mlx_get_data_addr(data->wall3, &data->bits_per_pixel, &data->line_length, &data->endian);
-	// data->wall4 = mlx_xpm_file_to_image(cub->mlx, "stone.xpm", &data->img_width, &data->img_height);
-	// data->addr = mlx_get_data_addr(data->wall4, &data->bits_per_pixel, &data->line_length, &data->endian);
 }
 
 void	draw_ray(t_cub *cub, t_ray *ray)
@@ -99,13 +92,10 @@ void	draw_ray(t_cub *cub, t_ray *ray)
 	y = ray->start;
 	while (++y < ray->end)
 	{
-		// printf("%d\n", cub->tex[ray->side].img_height);
 		ray->tex_y = (int)ray->tex_pos & (cub->tex[ray->side].img_height - 1);
-		// printf("%d\n", ray->tex_y);
 		ray->tex_pos += ray->step;
-		ray->color = (*get_img_pixel(&(cub->tex[ray->side]), ray->tex_x, ray->tex_y));
-		// printf("aqui\n");
-		if (ray->side == NO || ray->side == SO)
+		ray->color = *(get_img_pixel(&(cub->tex[ray->side]), ray->tex_x, ray->tex_y));
+		if (ray->side == WE || ray->side == EA)
 			ray->color = mlx_get_color_value(cub->mlx, (int)((ray->color & 0x0000FF) * 0.70)
 				| (int)(((ray->color >> 8) & 0x0000FF) * 0.70) << 8
 				| (int)((ray->color >> 16) * 0.70) << 16);

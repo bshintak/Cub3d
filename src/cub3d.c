@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:20:45 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/10 18:27:34 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:03:15 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,20 +181,17 @@ int	raycasting_loop(t_cub *cub)
 		hit_wall(cub, &ray);
 		calc_texture(&ray, cub);
 		ray.line_h = (int)(CUB_H / ray.perpendicular);
-		ray.step = 1.0 * cub->frame.img_height / ray.line_h;
+		ray.step = 1.0 * cub->tex[ray.side].img_height / ray.line_h;
 		ray.start = (-ray.line_h + cub->h) / 2 + CUB_H / 2;
 		if (ray.start < 0)
 			ray.start = 0;
 		ray.end = (ray.line_h + cub->h) / 2 + CUB_H / 2;
 		if (ray.end > CUB_H)
 			ray.end = CUB_H;
-		ray.tex_pos = (ray.start - ((CUB_H + cub->h) / 2) + ray.line_h / 2) * ray.step;
-		// if (ray.side == 1)
-			draw_ray(cub, &ray);
-		// else
-			// draw_ray(cub, ray, 0x0000FF00);
+		ray.tex_pos = (ray.start - ((cub->h + CUB_H) / 2) + ray.line_h / 2) * ray.step;
+		draw_ray(cub, &ray);
 	}
-		// print_minimap(cub);
+		print_minimap(cub);
 		mlx_clear_window(cub->mlx, cub->mlx_w);
 		mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->frame.img, 0, 0);
 		mlx_destroy_image(cub->mlx, cub->frame.img);
