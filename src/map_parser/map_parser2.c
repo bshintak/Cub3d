@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:13:20 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/18 16:46:07 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:08:21 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	add_texture(char *line, t_cub *cub, int *var, int type)
 		printf("Error\nDuplicated texture: \"%s\"\n", line);
 		return (1);
 	}
-	// Maybe check here if textures have a valid path
 	cub->walls[type] = ft_strdup(line + 3);
 	*var -= 1;
 	free(line);
@@ -68,7 +67,6 @@ int	add_matrix(t_cub *cub, char *line)
 	if (cub->map)
 		free(cub->map);
 	cub->map = map;
-	// printf_matrix(cub->map);
 	return (0);
 }
 
@@ -82,11 +80,13 @@ int	check_line(char *line, int *player)
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && \
 		line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
 		{
-			printf("Error\nMap contains at least one invalid character '%C'\n", line[i]);
+			printf("Error\nMap contains at least one invalid character ");
+			printf("'%C'\n", line[i]);
 			free(line);
 			return (1);
 		}
-		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+		if (line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'E' || line[i] == 'W')
 			*player += 1;
 		if (*player > 1)
 		{

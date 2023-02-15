@@ -6,7 +6,7 @@
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/11 21:29:07 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:09:54 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@
 # define CEILING 1
 # define FLOOR 0
 
-# define WALL_1 0
-# define WALL_2 1
-# define WALL_3 2
-# define WALL_4 3
-
-# define NO 0
-# define EA 1
-# define SO 2
-# define WE 3
-
 # define C_NO 0
 # define C_EA 1
 # define C_SO 2
@@ -43,6 +33,7 @@
 
 # define CUB_W 1000
 # define CUB_H 500
+
 
 //MINIMAP
 # define MAP_RADIUS 100
@@ -74,13 +65,13 @@
 # define MOUSE_SENSITIVITY_Y 0.7
 
 typedef struct s_data {
-	int		img_width;
-	int		img_height;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		x_size;
+	int		y_size;
 }	t_data;
 
 typedef struct	s_wall
@@ -108,15 +99,19 @@ typedef struct s_keys
 }	t_keys;
 
 typedef struct s_ray{
+	double			size;
+	
 	int				i;
 	double			camera_x;
 	double			perpendicular;
-	double			rayDir_x;
-	double			rayDir_y;
-	double			deltaDist_x;
-	double			deltaDist_y;
-	double			sideDist_x;
-	double			sideDist_y;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	double			map_dir_x;
+	double			map_dir_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			side_dist_x;
+	double			side_dist_y;
 	double			steps_x;
 	double			steps_y;
 	int				map_x;
@@ -126,17 +121,18 @@ typedef struct s_ray{
 	int				start;
 	int				end;
 	int				side;
-	int				tex_x;
-	int				tex_y;
-	double			tex_pos;
-	double			step;
+
 	double			wall_x;
-	unsigned int	color;
+	// double			wall_x2;
+	double			wall_hit;
+	double			wall_hit_x;
+	double			wall_hit_y;
+	// double			wall_y2;
 }	t_ray;
 
 typedef struct s_cub {
-	t_data				tex[15];
 	char				*walls[4];
+	t_data				wall_t[4];
 	unsigned int		color[2];
 	int					color_check[2];
 	int					check_f;
@@ -147,8 +143,6 @@ typedef struct s_cub {
 	double				dir_y;
 	double				plane_x;
 	double				plane_y;
-	double				moveSpeed;
-	double				rotSpeed;
 	char				**map;
 	void				*mlx;
 	void				*mlx_w;
@@ -159,6 +153,8 @@ typedef struct s_cub {
 	int					mp_x;
 	int					mp_y;
 	int					mp_u;
+	double				mp_a;
+	int					mp_color;
 	
 	int					w;
 	int					a;
@@ -219,23 +215,28 @@ int			parse_error(char *line, t_cub *cub, char *msg);
 void		free_textures(t_cub cub);
 
 //raycasting.c
-void	move_mouse(t_cub *cub);
-void	ray_main(t_cub *cub);
-int		raycasting_key(int key, t_cub *cub);
-int		raycasting_loop(t_cub *cub);
+void		move_mouse(t_cub *cub);
+void		ray_main(t_cub *cub);
+int			raycasting_key(int key, t_cub *cub);
+int			raycasting_loop(t_cub *cub);
 
-int		close_win(void);
-void	search_player(t_cub *cub);
-void	search_direction(t_cub *cub);
-void	search_plane(t_cub *cub);
+int			close_win(void);
+void		search_player(t_cub *cub);
+void		search_direction(t_cub *cub);
+void		search_plane(t_cub *cub);
 
 //image_printing
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	my_mlx_pixel_put_add(t_data *data, int x, int y, int color);
-void	my_mlx_pixel_put_inv(t_data *data, int x, int y);
-void	my_mlx_pixel_put_drk(t_data *data, int x, int y);
-void	create_image(t_cub *cub, t_data *data, int size_x, int size_y);
-void	draw_ray(t_cub *cub, t_ray *ray);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			my_mlx_pixel_put_add(t_data *data, int x, int y, int color);
+void			my_mlx_pixel_put_sub(t_data *data, int x, int y, int color);
+void			my_mlx_pixel_put_add2(t_data *data, int x, int y, int color);
+void			my_mlx_pixel_put_inv(t_data *data, int x, int y);
+void			my_mlx_pixel_put_drk(t_data *data, int x, int y);
+unsigned int	get_image_color(t_data *data, int x, int y);
+void			create_image(t_cub *cub, t_data *data, int size_x, int size_y);
+void			draw_ray(t_cub *cub, t_ray ray, int color);
+void			draw_vector(t_cub *cub, double dir_x, double dir_y, double max_size);
+int				rgb_spectrum(void);
 
 //ray_key.c
 int		key_up(int key, t_cub *cub);
@@ -244,14 +245,27 @@ void	move(t_cub *cub, int ws, int ad);
 int		mouse_hook(int code);
 
 //minimap.c
+void	print_minimap_wall_fill(t_cub *cub, t_coords c, t_wall w, int offset);
+void	minimap_wall_pixel(t_cub *cub, t_coords c, t_wall w, int mode);
+void	draw_player(t_cub *cub, int height);
+int		check_borders(int x, int y);
+
+//minimap2.c
+void	print_minimap_wall(t_cub *cub, int m_x, int m_y);
+void	print_outline(t_cub *cub);
 void	print_minimap(t_cub *cub);
 
-//calc_side_delta.c
-void	calc_sideDist(t_ray *ray, t_cub *cub);
-void	calc_deltaDist(t_ray *ray);
+//init_textures.c
+int		init_textures(t_cub *cub);
 
-void	init_images(t_cub *cub);
-unsigned int	*get_img_pixel(t_data *data, int x, int y);
+//print_textures.c
+void	print_textures(t_cub *cub, t_ray ray);
+
+void	calc_side_dist(t_ray *ray, t_cub *cub);
+void	calc_delta_dist(t_ray *ray);
+void	hit_wall(t_cub *cub, t_ray *ray);
+int		get_side(t_ray ray);
+
 int *mp_unit(void);
 
 #endif 

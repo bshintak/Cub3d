@@ -19,18 +19,27 @@ NAME		=	cub3d
 INCLUDE		=	-I ./ mlx-linux/libmlx_Linux.a
 
 SRCS_		=	cub3d.c \
-				calc_side_delta.c\
-				pseudo_global.c\
-				search.c\
-				mouse/move_mouse.c\
 				close.c \
-				raycasting/raycasting.c \
-				ray_key.c \
+				init_textures.c \
+				print_textures.c \
 				image_printing.c \
 				minimap.c \
+				minimap2.c \
 				testing_prints.c \
-				get_next_line.c \
-				get_next_line_utils.c \
+				my_mlx_pixel.c \
+				my_mlx_pixel2.c \
+				gnl/get_next_line.c \
+				gnl/get_next_line_utils.c \
+				raycasting/calc.c \
+				raycasting/search.c \
+				raycasting/hit_wall.c \
+				raycasting/rotate.c \
+				raycasting/ray_key.c \
+				raycasting/raycasting.c \
+				raycasting/mouse_hook.c \
+				raycasting/move_mouse.c \
+				raycasting/move_player.c \
+				raycasting/pseudo_global.c \
 				map_parser/map_parser.c \
 				map_parser/map_parser2.c \
 				map_parser/map_parser3.c \
@@ -56,6 +65,10 @@ $(NAME): $(DEPS) $(OBJS)
 
 ./minilibx_linux/libmlx_Linux.a:
 	make -C mlx-linux/
+
+#bonus:		$(SRCS_B) $(OBJS_B)
+#			$(CC) $(CFLAGS) $(SRCS_B) -o $(NAME_B)
+#			$(CC) $(CFLAGS) $(SRCS_B) -c
 
 $(_OBJ):
 	mkdir $@

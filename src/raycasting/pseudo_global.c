@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   pseudo_global.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 17:02:55 by bshintak          #+#    #+#             */
-/*   Updated: 2023/02/13 19:55:43 by bshintak         ###   ########.fr       */
+/*   Created: 2023/02/13 19:11:34 by bshintak          #+#    #+#             */
+/*   Updated: 2023/02/13 19:48:13 by bshintak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
-int	close_win(void)
+int	*mp_unit(void)
 {
-	exit(0);
-	return (0);
+	static int	cubaskgfkasf;
+
+	return (&cubaskgfkasf);
 }
