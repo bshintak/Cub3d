@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hanhuka <hanhuka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:57:01 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/15 14:08:33 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:52:24 by hanhuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_error(char *line, t_cub *cub, char *msg)
 	return (1);
 }
 
-void	free_textures(t_cub cub)
+void	free_textures_char(t_cub cub)
 {
 	int	i;
 

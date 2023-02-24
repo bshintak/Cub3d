@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hanhuka <hanhuka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:16:58 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/01/18 17:09:25 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/15 20:53:09 by hanhuka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	parse_file(int ac, char **av, t_cub *cub)
 		return (1);
 	if (parse_map(cub, fd) || check_map(cub))
 	{
-		free_textures(*cub);
+		free_textures_char(*cub);
 		return (1);
 	}
 	close(fd);

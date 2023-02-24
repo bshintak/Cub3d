@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_printing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:08:46 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/15 15:30:56 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:00:22 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,70 +39,6 @@ void	draw_ray(t_cub *cub, t_ray ray, int color)
 				ray.start, cub->color[FLOOR]);
 		ray.start++;
 	}
-}
-
-int	rgb_spectrum(void)
-{
-	static int	angle = 0;
-	static int	swtch = 0;
-	int			red;
-	int			green;
-	int			blue;
-
-	if (angle == 0)
-		swtch = 0;
-	else if (angle == 360)
-		swtch = 1;
-	const int HSVlights[61] =
-	{
-		0, 4, 8, 13, 17, 21, 25, 30, 34, 38, 42, 47, 51,
-		55, 59, 64, 68, 72, 76, 81, 85, 89, 93, 98, 102,
-		106, 110, 115, 119, 123, 127, 132, 136, 140, 144,
-		149, 153, 157, 161, 166, 170, 174, 178, 183, 187,
-		191, 195, 200, 204, 208, 212, 217, 221, 225, 229,
-		234, 238, 242, 246, 251, 255
-	};
-	if (angle < 60)
-	{
-		red = 255;
-		green = HSVlights[angle];
-		blue = 0;
-	}
-	else if (angle < 120)
-	{
-		red = HSVlights[120 - angle];
-		green = 255;
-		blue = 0;
-	}
-	else if (angle < 180)
-	{
-		red = 0;
-		green = 255;
-		blue = HSVlights[angle - 120];
-	}
-	else if (angle < 240)
-	{
-		red = 0;
-		green = HSVlights[240 - angle];
-		blue = 255;
-	}
-	else if (angle < 300)
-	{
-		red = HSVlights[angle - 240];
-		green = 0;
-		blue = 255;
-	}
-	else
-	{
-		red = 255;
-		green = 0;
-		blue = HSVlights[360 - angle];
-	}
-	if (!swtch)
-		angle += 2;
-	else
-		angle -= 2;
-	return ((red << 16) + (green << 8) + blue);
 }
 
 void	draw_vector(t_cub *cub, double dir_x, double dir_y, double max_size)

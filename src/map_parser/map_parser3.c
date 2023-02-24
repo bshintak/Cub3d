@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:41:27 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/15 14:11:32 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/18 01:57:08 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 int	check_coords(t_cub *cub, int x, int y)
 {
-	if (y == 0 || x == 0 || !cub->map[y - 1][x] || cub->map[y - 1][x] == ' ' ||
+	if (y == 0 || x == 0 || (int)ft_strlen(cub->map[y - 1]) <= x + 1
+		|| !cub->map[y - 1][x] || cub->map[y - 1][x] == ' ' ||
 	!cub->map[y - 1][x + 1] || cub->map[y - 1][x + 1] == ' ' ||
+	(int)ft_strlen(cub->map[y + 1]) <= x + 1 ||
 	!cub->map[y][x + 1] || cub->map[y][x + 1] == ' ' ||
 	!cub->map[y + 1][x + 1] || cub->map[y + 1][x + 1] == ' ' ||
 	!cub->map[y + 1][x] || cub->map[y + 1][x] == ' ' ||
 	!cub->map[y + 1][x - 1] || cub->map[y + 1][x - 1] == ' ' ||
 	!cub->map[y][x - 1] || cub->map[y][x - 1] == ' ' ||
 	!cub->map[y - 1][x - 1] || cub->map[y - 1][x - 1] == ' ')
+	{
 		return (1);
+	}
 	return (0);
 }
 
@@ -39,7 +43,8 @@ int	check_map(t_cub *cub)
 		{
 			if ((cub->map[y][x] == '0' || cub->map[y][x] == 'N'
 				|| cub->map[y][x] == 'S' || cub->map[y][x] == 'W'
-				|| cub->map[y][x] == 'E') && (check_coords(cub, x, y)))
+				|| cub->map[y][x] == 'E' || cub->map[y][x] == 'D'
+				|| cub->map[y][x] == 'C') && (check_coords(cub, x, y)))
 			{
 				printf("Error\nMap is not correcty configured\nStopped at point");
 				printf(" [%d][%d]\n", y, x);

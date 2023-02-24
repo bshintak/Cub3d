@@ -3,108 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:20:45 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/15 15:53:36 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:38:20 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	minimap_view(t_cub *cub, t_ray *ray)
+void	starting_loop(t_cub *cub)
 {
-	double	m;
-	double	b;
-	double	size;
+	t_coords	c;
 
-	if (ray->side == 1)
-		ray->wall_hit_x = ray->wall_x + (double)ray->map_x;
-	else
-		ray->wall_hit_y = ray->wall_x + (double)ray->map_y;
-	if (!ray->ray_dir_x)
-		m = 1e30;
-	else
-		m = ray->ray_dir_y / ray->ray_dir_x;
-	b = cub->pos_y - (m * cub->pos_x);
-	if (ray->side == 1)
-		ray->wall_hit_y = m * ray->wall_hit_x + b;
-	else
-	{
-		if (!m)
-			ray->wall_hit_x = 1e30;
-		else
-			ray->wall_hit_x = (ray->wall_hit_y - b) / m;
-	}
-	size = sqrt((cub->pos_x - ray->wall_hit_x) * (cub->pos_x - ray->wall_hit_x)
-			+ (cub->pos_y - ray->wall_hit_y) * (cub->pos_y - ray->wall_hit_y));
-	draw_vector(cub, -0.66 * ray->camera_x, -1, size * (*mp_unit()));
-}
-
-void	raycasting(t_cub *cub, t_ray *ray)
-{
-	ray->camera_x = 2 * ray->i / (double)CUB_W - 1;
-	ray->ray_dir_x = cub->dir_x + cub->plane_x * ray->camera_x;
-	ray->ray_dir_y = cub->dir_y + cub->plane_y * ray->camera_x;
-	calc_delta_dist(ray);
-	calc_side_dist(ray, cub);
-	hit_wall(cub, ray);
-	ray->line_h = (int)(CUB_H / ray->perpendicular);
-	ray->start = (-ray->line_h + cub->h) / 2 + CUB_H / 2;
-	ray->end = (ray->line_h + cub->h) / 2 + CUB_H / 2;
-	if (ray->side == 0)
-		ray->wall_x = cub->pos_y + ray->perpendicular * ray->ray_dir_y;
-	else
-		ray->wall_x = cub->pos_x + ray->perpendicular * ray->ray_dir_x;
-	ray->wall_x -= floor((ray->wall_x));
-}
-
-int	get_side(t_ray ray)
-{
-	if (ray.side == 0)
-	{
-		if (ray.ray_dir_x > 0)
-			return (C_WE);
-		return (C_EA);
-	}
-	else
-	{
-		if (ray.ray_dir_y > 0)
-		{
-			return (C_NO);
-		}
-		return (C_SO);
-	}
-}
-
-int	raycasting_loop(t_cub *cub)
-{
-	t_ray	ray;
-
-	ray.i = -1;
-	if (!cub->alt)
-		move_mouse(cub);
-	move(cub, cub->w - cub->s, cub->a - cub->d);
-	rotate(cub, cub->r - cub->l, cub->up - cub->dw);
-	create_image(cub, &cub->frame, CUB_W, CUB_H);
-	while (++ray.i < CUB_W && !cub->tab)
-	{
-		raycasting(cub, &ray);
-		print_textures(cub, ray);
-	}
-	print_minimap(cub);
-	ray.i = -1;
-	cub->mp_color = rgb_spectrum();
-	while (++ray.i < CUB_W)
-	{
-		raycasting(cub, &ray);
-		minimap_view(cub, &ray);
-	}
-	draw_player(cub, *mp_unit() + 5);
+	mlx_mouse_get_pos(cub->mlx, cub->mlx_w, &c.ix, &c.iy);
 	mlx_clear_window(cub->mlx, cub->mlx_w);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->frame.img, 0, 0);
-	mlx_destroy_image(cub->mlx, cub->frame.img);
-	return (0);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->background, 0, 0);
+	if (c.ix >= (CUB_W / 2 - 150) && c.ix <= (CUB_W / 2 + 150) && c.iy \
+		>= (CUB_H / 2 - 55) && c.iy <= (CUB_H / 2 + 55))
+		mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->start, \
+			CUB_W / 2 - 150, (CUB_H / 2 - 55));
+	else
+		mlx_put_image_to_window(cub->mlx, cub->mlx_w, cub->start_selected, \
+			CUB_W / 2 - 150, (CUB_H / 2 - 55));
+}
+
+int	game(t_cub *cub)
+{
+	if (*starting_screen())
+		starting_loop(cub);
+	else
+		raycasting_loop(cub);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -113,7 +43,6 @@ int	main(int ac, char **av)
 
 	if (parse_file(ac, av, &cub))
 		return (1);
-	print_vars(cub);
 	if (init_textures(&cub))
 		return (1);
 	ray_main(&cub);

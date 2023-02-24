@@ -1,4 +1,4 @@
-	# **************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,12 +6,12 @@
 #    By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 16:26:20 by ralves-g          #+#    #+#              #
-#    Updated: 2022/11/08 16:18:15 by ralves-g         ###   ########.fr        #
+#    Updated: 2023/02/24 17:13:59 by ralves-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS		=	-Wall -Wextra -Werror -g #-fsanitize=address 
 RM			=	rm -f
 
 NAME		=	cub3d
@@ -20,22 +20,33 @@ INCLUDE		=	-I ./ mlx-linux/libmlx_Linux.a
 
 SRCS_		=	cub3d.c \
 				close.c \
+				collectible.c \
+				collectible2.c \
 				init_textures.c \
 				print_textures.c \
+				print_transparent_door.c \
+				print_transparent_collectible.c \
+				flashlight.c \
 				image_printing.c \
+				rgb_spectrum.c \
 				minimap.c \
 				minimap2.c \
 				testing_prints.c \
 				my_mlx_pixel.c \
 				my_mlx_pixel2.c \
+				doors.c \
+				minimap_static.c \
+				minimap_static2.c \
 				gnl/get_next_line.c \
 				gnl/get_next_line_utils.c \
+				raycasting/raycasting.c \
+				raycasting/minimap_static3.c \
 				raycasting/calc.c \
 				raycasting/search.c \
 				raycasting/hit_wall.c \
 				raycasting/rotate.c \
 				raycasting/ray_key.c \
-				raycasting/raycasting.c \
+				raycasting/hooks_and_inits.c \
 				raycasting/mouse_hook.c \
 				raycasting/move_mouse.c \
 				raycasting/move_player.c \
@@ -63,18 +74,15 @@ $(_OBJ)%.o: $(_SRC)%.c
 $(NAME): $(DEPS) $(OBJS)
 	$(CC) $(CFLAGS) -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz $(OBJS) -o $(NAME) $(INCLUDE) -L $(_MLX)
 
-./minilibx_linux/libmlx_Linux.a:
-	make -C mlx-linux/
-
-#bonus:		$(SRCS_B) $(OBJS_B)
-#			$(CC) $(CFLAGS) $(SRCS_B) -o $(NAME_B)
-#			$(CC) $(CFLAGS) $(SRCS_B) -c
+./mlx-linux/libmlx_Linux.a:
+	cd mlx-linux;./configure
 
 $(_OBJ):
 	mkdir $@
 
 clean:
 	$(RM) -r $(OBJS)
+	cd mlx-linux; make clean
 
 fclean:	clean
 	$(RM) -r $(NAME)
