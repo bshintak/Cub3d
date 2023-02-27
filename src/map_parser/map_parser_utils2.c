@@ -101,6 +101,8 @@ long int	ft_atoi(const char *str)
 		num = num * 10 + str[i] - '0';
 		i++;
 	}
+	if (str[i])
+		return (-1);
 	return (num * neg);
 }
 

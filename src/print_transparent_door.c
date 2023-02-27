@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_transparent_door.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 22:32:34 by hanhuka           #+#    #+#             */
-/*   Updated: 2023/02/24 15:56:47 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:56:07 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 void	transparency_loop(t_cub *cub, t_ray *ray)
 {
-	while (ray->t_collec)
-	{
-		raycasting(cub, ray, 3);
-		print_textures_c(cub, *ray);
-		ray->t_collec--;
-	}
 	while (ray->t_walls)
 	{
 		raycasting(cub, ray, 1);
-		print_textures_t(cub, *ray);
+		if (cub->map[ray->map_y][ray->map_x] == 'D')
+			print_textures_t(cub, *ray);
+		else
+			print_textures_c(cub, *ray);
 		ray->t_walls--;
 	}
 }

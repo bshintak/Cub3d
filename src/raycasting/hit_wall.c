@@ -6,7 +6,7 @@
 /*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 20:12:39 by bshintak          #+#    #+#             */
-/*   Updated: 2023/02/24 17:02:03 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:59:01 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	hit_t_wall(t_cub *cub, t_ray *ray)
 			ray->map_y += ray->steps_y;
 			ray->side = 1;
 		}
-		if (cub->map[ray->map_y][ray->map_x] == 'D')
+		if (cub->map[ray->map_y][ray->map_x] == 'D' \
+			|| cub->map[ray->map_y][ray->map_x] == 'B')
 			ray->t_walls_parse++;
 	}
 	if (ray->side == 0)
@@ -65,47 +66,20 @@ void	hit_t_wall(t_cub *cub, t_ray *ray)
 		ray->perpendicular = ray->side_dist_y - ray->delta_dist_y;
 }
 
-void	hit_c_wall2(t_cub *cub, t_ray *ray)
+void	hit_wall2(t_cub *cub, t_ray *ray)
 {
 	if (cub->map[ray->map_y][ray->map_x] == '1')
 		ray->hit_wall = 1;
-	if (cub->map[ray->map_y][ray->map_x] == 'D')
+	if (cub->map[ray->map_y][ray->map_x] == 'D'
+		|| cub->map[ray->map_y][ray->map_x] == 'B')
 		ray->t_walls++;
-	if (cub->map[ray->map_y][ray->map_x] == 'B')
-		ray->t_collec++;
-}
-
-void	hit_c_wall(t_cub *cub, t_ray *ray)
-{
-	ray->t_collec_parse = 0;
-	while (ray->t_collec_parse != ray->t_collec)
-	{
-		if (ray->side_dist_x < ray->side_dist_y)
-		{
-			ray->side_dist_x += ray->delta_dist_x;
-			ray->map_x += ray->steps_x;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_dist_y += ray->delta_dist_y;
-			ray->map_y += ray->steps_y;
-			ray->side = 1;
-		}
-		if (cub->map[ray->map_y][ray->map_x] == 'B')
-			ray->t_collec_parse++;
-	}
-	if (ray->side == 0)
-		ray->perpendicular = ray->side_dist_x - ray->delta_dist_x;
-	else
-		ray->perpendicular = ray->side_dist_y - ray->delta_dist_y;
 }
 
 void	hit_wall(t_cub *cub, t_ray *ray)
 {
+	(void)cub;
 	ray->hit_wall = 0;
 	ray->t_walls = 0;
-	ray->t_collec = 0;
 	while (!(ray->hit_wall))
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -120,7 +94,7 @@ void	hit_wall(t_cub *cub, t_ray *ray)
 			ray->map_y += ray->steps_y;
 			ray->side = 1;
 		}
-		hit_c_wall2(cub, ray);
+		hit_wall2(cub, ray);
 	}
 	if (ray->side == 0)
 		ray->perpendicular = ray->side_dist_x - ray->delta_dist_x;

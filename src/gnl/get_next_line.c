@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshintak <bshintak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:41:30 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/13 20:04:07 by bshintak         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:55:21 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ char	*till_nl(int fd, char *buf)
 
 	i = 0;
 	join1 = cpyfrm2(buf, 0, -1);
-	join2 = (char *)malloc(10 + 1);
-	ft_memset(join2, 0, 10 + 1);
-	i = read(fd, join2, 10);
+	join2 = (char *)malloc(BUFFER_SIZE + 1);
+	ft_memset(join2, 0, BUFFER_SIZE + 1);
+	i = read(fd, join2, BUFFER_SIZE);
 	if (i == 0)
 	{
 		free(join1);
@@ -129,7 +129,7 @@ char	*get_next_line(int fd)
 	static char		*buf;
 	struct s_gnl	two;
 
-	if (10 < 1 || fd < 0)
+	if (BUFFER_SIZE < 1 || fd < 0)
 		return (0);
 	two = bruh(fd, buf);
 	free(buf);

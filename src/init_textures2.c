@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   init_textures2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 16:31:21 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/25 17:55:37 by ralves-g         ###   ########.fr       */
+/*   Created: 2023/02/25 16:41:09 by ralves-g          #+#    #+#             */
+/*   Updated: 2023/02/25 16:49:24 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../cub3d.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
+void	init_textures_null(t_cub *cub)
+{
+	int	i;
 
-#define BUFFER_SIZE 1
-
-char		*get_next_line(int fd);
-size_t		ft_strlen(const char *word);
-char		*ft_strjoin(char const *s1, char const *s2);
-void		*ft_memset(void *b, int c, size_t len);
-char		*cpyfrm2(char *str, int i, int end);
-
-#endif
+	i = -1;
+	while (++i < 4)
+	{
+		cub->wall_t[i].img = NULL;
+		cub->collec_l[i].img = NULL;
+	}
+	cub->doors.img = NULL;
+	cub->start = NULL;
+	cub->start_selected = NULL;
+	cub->background = NULL;
+}

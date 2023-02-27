@@ -6,7 +6,7 @@
 /*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:41:27 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/18 01:57:08 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/25 18:18:32 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int	check_coords(t_cub *cub, int x, int y)
 	!cub->map[y + 1][x - 1] || cub->map[y + 1][x - 1] == ' ' ||
 	!cub->map[y][x - 1] || cub->map[y][x - 1] == ' ' ||
 	!cub->map[y - 1][x - 1] || cub->map[y - 1][x - 1] == ' ')
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -44,7 +42,7 @@ int	check_map(t_cub *cub)
 			if ((cub->map[y][x] == '0' || cub->map[y][x] == 'N'
 				|| cub->map[y][x] == 'S' || cub->map[y][x] == 'W'
 				|| cub->map[y][x] == 'E' || cub->map[y][x] == 'D'
-				|| cub->map[y][x] == 'C') && (check_coords(cub, x, y)))
+				|| cub->map[y][x] == 'B') && (check_coords(cub, x, y)))
 			{
 				printf("Error\nMap is not correcty configured\nStopped at point");
 				printf(" [%d][%d]\n", y, x);

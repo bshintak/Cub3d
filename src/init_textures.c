@@ -6,7 +6,7 @@
 /*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:51:49 by bshintak          #+#    #+#             */
-/*   Updated: 2023/02/24 16:40:22 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:23:30 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	doors(t_cub *cub)
 	int	x;
 
 	y = -1;
-	cub->parsing_doors = 0;
 	while (cub->map[++y])
 	{
 		x = -1;
@@ -87,6 +86,7 @@ int	error_init_textures(t_cub *cub)
 	free_matrix(cub->map);
 	free_textures_char(*cub);
 	free_textures(cub);
+	mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
 	return (1);
 }
@@ -96,9 +96,9 @@ int	init_textures(t_cub *cub)
 	int	i;
 
 	cub->mlx = mlx_init();
-	i = -1;
-	while (++i < 4)
-		cub->wall_t[i].img = NULL;
+	cub->parsing_doors = 0;
+	cub->parsing_collectible = 0;
+	init_textures_null(cub);
 	i = 0;
 	while (i < 4)
 	{

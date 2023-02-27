@@ -6,7 +6,7 @@
 /*   By: ralves-g <ralves-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:17:31 by ralves-g          #+#    #+#             */
-/*   Updated: 2023/02/24 17:39:58 by ralves-g         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:46:27 by ralves-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,6 @@ typedef struct s_ray{
 	int				start;
 	int				end;
 	int				side;
-	int				t_collec;
-	int				t_collec_parse;
 	int				t_walls;
 	int				t_walls_parse;
 	double			wall_x;
@@ -318,6 +316,9 @@ void			print_map_door2(t_cub *cub, int m_x, int m_y, char chr);
 //init_textures.c
 void			free_textures(t_cub *cub);
 int				init_textures(t_cub *cub);
+
+//init_textures2.c
+void			init_textures_null(t_cub *cub);
 
 //print_textures.c
 void			ceiling_color(t_cub *cub, t_ray *ray, double *start);
