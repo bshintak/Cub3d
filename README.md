@@ -12,6 +12,16 @@
   <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Start.png />
 </p>
 
+`Game`
+<p align="left">
+  <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Game.png />
+</p>
+
+`Collectible`
+<p align="left">
+  <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Collectible.png />
+</p>
+
 ### search_player
 function that searches for the player in a map represented as a 2D array of characters.
 
