@@ -7,6 +7,9 @@
  [![Lines of code](https://img.shields.io/tokei/lines/github/bshintak/Cub3d?color=blueviolet)](https://github.com/bshintak/Cub3d)
  [![Activity](https://img.shields.io/github/last-commit/bshintak/Cub3d?color=red&label=Last%20Commit&style=flat)](https://github.com/bshintak/Cub3d)
 
+`Keys`
+- W A S D -> move player
+
 `Init game`
 <p align="left">
   <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Start.png />
