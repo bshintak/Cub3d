@@ -7,6 +7,8 @@
  [![Lines of code](https://img.shields.io/tokei/lines/github/bshintak/Cub3d?color=blueviolet)](https://github.com/bshintak/Cub3d)
  [![Activity](https://img.shields.io/github/last-commit/bshintak/Cub3d?color=red&label=Last%20Commit&style=flat)](https://github.com/bshintak/Cub3d)
 
+<img> src ="img/init.png" </img>
+
 ### search_player
 function that searches for the player in a map represented as a 2D array of characters.
 
