@@ -9,7 +9,7 @@
 
 `Init game`
 <p align="left">
-  <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/init.png />
+  <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Start.png />
 </p>
 
 ### search_player
