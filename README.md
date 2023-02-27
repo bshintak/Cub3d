@@ -20,6 +20,11 @@
   <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Game.png />
 </p>
 
+`Flashlight`
+<p align="left">
+  <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Flashlight.png />
+</p>
+
 `Collectible`
 <p align="left">
   <img src=https://raw.githubusercontent.com/bshintak/Cub3d/main/img/Collectible.png />
