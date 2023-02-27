@@ -9,6 +9,12 @@
 
 `Keys`
 - W A S D -> move player
+- M -> change minimap
+- L -> turn off the light
+- F -> turn on the flashlight
+- Tab -> open the minimap
+- Esc -> close the window
+- C -> pick the collectible
 
 `Init game`
 <p align="left">
